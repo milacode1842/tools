@@ -5,88 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serika's Utility Kit</title>
     <style>
-        /* 全体のリセットと共通設定 */
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
         }
         body {
             background-color: #12181f;
             color: #e2e8f0;
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
             line-height: 1.6;
-            padding: 40px 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             min-height: 100vh;
         }
 
-        /* ヘッダーセクション */
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            max-width: 800px;
+        aside {
+            width: 260px;
+            background-color: #1a222d;
+            border-right: 1px solid #2d3748;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
         }
-        header h1 {
-            font-size: 2.5rem;
+        .site-title {
+            font-size: 1.4rem;
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 40px;
             letter-spacing: -0.5px;
         }
-        header p {
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .nav-menu a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: block;
+        }
+        .nav-menu a:hover {
+            color: #4fd1c5;
+            background-color: #242f3d;
+        }
+
+        main {
+            margin-left: 260px;
+            padding: 60px 40px;
+            flex-grow: 1;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        section {
+            scroll-margin-top: 60px;
+        }
+        section h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #1e2631;
+        }
+
+        .home-hero {
+            text-align: left;
+        }
+        .home-hero h1 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .home-hero p {
             font-size: 1.1rem;
             color: #94a3b8;
+            max-width: 700px;
         }
 
-        /* ツールカードのグリッドレイアウト */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-            margin-bottom: 60px;
         }
-
-        /* 個別のカードスタイル */
         .tool-card {
             background-color: #1e2631;
             border: 1px solid #2d3748;
             border-radius: 12px;
             padding: 30px 20px;
-            text-align: center;
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            text-align: left;
+            transition: all 0.2s ease;
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
-            align-items: center;
         }
         .tool-card:hover {
             transform: translateY(-4px);
             border-color: #4fd1c5;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(79, 209, 197, 0.1);
         }
-
-        /* カード内のアイコンエリア */
         .tool-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             color: #4fd1c5;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
-        .tool-card h2 {
+        .tool-card h3 {
             font-size: 1.25rem;
             color: #ffffff;
             margin-bottom: 12px;
-            font-weight: 600;
         }
         .tool-card p {
             font-size: 0.9rem;
@@ -94,36 +137,45 @@
             flex-grow: 1;
         }
 
-        /* フィードバック・フォームセクション */
-        .feedback-section {
-            text-align: center;
-            max-width: 650px;
-            background-color: rgba(30, 38, 49, 0.5);
-            padding: 40px 30px;
-            border-radius: 16px;
-            border: 1px dashed #2d3748;
-            margin-bottom: 60px;
-        }
-        .feedback-section h2 {
-            font-size: 1.75rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-        .feedback-section p {
-            font-size: 0.95rem;
-            color: #94a3b8;
-            margin-bottom: 25px;
-        }
-
-        /* 連絡用パーツの並び */
-        .contact-methods {
+        .changelog-list {
+            list-style: none;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            gap: 15px;
+        }
+        .changelog-item {
+            background-color: #1a222d;
+            border-left: 4px solid #4fd1c5;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        .changelog-date {
+            font-size: 0.85rem;
+            color: #4fd1c5;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .changelog-text {
+            font-size: 0.95rem;
         }
 
-        /* Googleフォーム用ボタン */
+        .feedback-box {
+            background-color: rgba(30, 38, 49, 0.5);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px dashed #2d3748;
+        }
+        .feedback-box p {
+            color: #94a3b8;
+            margin-bottom: 30px;
+            max-width: 700px;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
         .form-btn {
             display: inline-block;
             background-color: #4fd1c5;
@@ -132,112 +184,175 @@
             padding: 14px 28px;
             border-radius: 30px;
             text-decoration: none;
-            font-size: 1rem;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(79, 209, 197, 0.2);
         }
         .form-btn:hover {
             background-color: #38b2ac;
             transform: scale(1.02);
         }
-
-        /* メール連絡のテキスト */
+        .form-btn.secondary {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            box-shadow: none;
+        }
+        .form-btn.secondary:hover {
+            background-color: #4a5568;
+        }
         .mail-contact {
             font-size: 0.9rem;
             color: #94a3b8;
-            margin-top: 5px;
         }
         .mail-contact a {
             color: #4fd1c5;
             text-decoration: none;
-            font-weight: 600;
         }
         .mail-contact a:hover {
             text-decoration: underline;
         }
 
-        /* フッター */
         footer {
-            text-align: center;
             font-size: 0.85rem;
             color: #64748b;
-            margin-top: auto;
-            width: 100%;
             border-top: 1px solid #1e2631;
             padding-top: 20px;
+            margin-top: 40px;
         }
-        footer a {
-            color: #4fd1c5;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            aside {
+                position: static;
+                width: 100%;
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid #2d3748;
+                align-items: center;
+            }
+            .site-title {
+                margin-bottom: 15px;
+            }
+            .nav-menu {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+            .nav-menu a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            main {
+                margin-left: 0;
+                padding: 40px 20px;
+                gap: 60px;
+            }
+            .home-hero h1 {
+                font-size: 2rem;
+            }
+            .feedback-box {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Serika's Utility Kit</h1>
-        <p>PCユーザーとデジタルクリエイターのための無料ツール集</p>
-    </header>
+    <aside>
+        <div class="site-title">Serika's Tools</div>
+        <ul class="nav-menu">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#software">ソフトウェア</a></li>
+            <li><a href="#changelog">更新履歴</a></li>
+            <li><a href="#feedback">ご意見・バグ報告</a></li>
+        </ul>
+    </aside>
 
-    <div class="tools-grid">
+    <main>
 
-        <a href="#link-to-download-1" class="tool-card">
-            <div class="tool-icon">🕒</div>
-            <h2>Timestamp Modifier</h2>
-            <p>Windows上のファイルやフォルダの作成日時・更新日時を、直感的な操作でかんたんに変更・調整できるツールです。</p>
-        </a>
+        <section id="home" class="home-hero">
+            <h1>Serika's Utility Kit</h1>
+            <p>PC作業を快適にするWindowsツールや、デジタルクリエイター向けのちょっと便利な小品フリーツールを公開・配布しています。</p>
+        </section>
 
-        <a href="#link-to-download-2" class="tool-card">
-            <div class="tool-icon">📱</div>
-            <h2>Macro Tool for Mobile</h2>
-            <p>スマホやエミュレータでの繰り返し作業を自動化するための、マクロ構成・スクリプト作成支援ツールです。</p>
-        </a>
+        <section id="software">
+            <h2>ソフトウェア</h2>
+            <div class="tools-grid">
 
-        <a href="#link-to-download-3" class="tool-card">
-            <div class="tool-icon">⏱️</div>
-            <h2>Taskbar Timer & Stopwatch</h2>
-            <p>作業の邪魔にならないよう、Windowsのタスクバー内に常駐して時間を計測・表示できるシンプルなタイマーです。</p>
-        </a>
+                <a href="dtc.html" class="tool-card">
+                    <div class="tool-icon">🕒</div>
+                    <h3>DropTimestampChanger</h3>
+                    <p>ファイルやフォルダの作成日時・更新日時・アクセス日時を、ドラッグ＆ドロップや高度な自動整形機能で自由自在に変更できるツールです。</p>
+                </a>
 
-        <a href="#link-to-download-4" class="tool-card">
-            <div class="tool-icon">📦</div>
-            <h2>WebP Zip Reprocessor</h2>
-            <p>稀にエラーを起こすWebP画像入りzipを、従来のSusieプラグイン等の古い画像ビューアでも読めるように自動修復します。</p>
-        </a>
+                <a href="#link-to-download-2" class="tool-card">
+                    <div class="tool-icon">📱</div>
+                    <h3>Macro Tool for Mobile</h3>
+                    <p>スマホやエミュレータでの繰り返し作業を自動化するための、マクロ構成・スクリプト作成支援ツールです。</p>
+                </a>
 
-        <a href="#link-to-download-5" class="tool-card">
-            <div class="tool-icon">🌐</div>
-            <h2>Chrome Favorites Organizer</h2>
-            <p>煩雑になりがちなGoogle Chromeのお気に入りを、整理・管理しやすくするための軽量なブラウザ拡張機能です。</p>
-        </a>
+                <a href="#link-to-download-3" class="tool-card">
+                    <div class="tool-icon">⏱️</div>
+                    <h3>Taskbar Timer & Stopwatch</h3>
+                    <p>作業の邪魔にならないよう、Windowsのタスクバー内に常駐して時間を計測・表示できるシンプルなタイマーです。</p>
+                </a>
 
-    </div>
+                <a href="#link-to-download-4" class="tool-card">
+                    <div class="tool-icon">📦</div>
+                    <h3>WebP Zip Reprocessor</h3>
+                    <p>稀にエラーを起こすWebP画像入りzipを、従来のSusieプラグイン等の古い画像ビューアでも読めるように自動修復します。</p>
+                </a>
 
-    <div class="feedback-section">
-        <h2>We Value Your Input!</h2>
-        <p>
-            バグの報告、機能の改善案、または「使えたよ！」という感想など、皆様からのご意見をお待ちしております。お気軽に以下の窓口からフィードバックをいただけると励みになります！
-        </p>
-        
-        <div class="contact-methods">
-            <a href="https://forms.gle/tJT4k46fiBFMz5EE6" target="_blank" class="form-btn">
-                📋 Googleフォームで報告する
-            </a>
-        </div>
-    </div>
-	
-	<div>
-		<p class="mail-contact">
-			メールはこちらまで： <a href="mailto:rasterlain-takana@yahoo.co.jp">rasterlain-takana@yahoo.co.jp</a>
-		</p>
-    </div>
-	
-    <footer>
-        <p>&copy; 2026 serika9683. Powered by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.</p>
-    </footer>
+                <a href="#link-to-download-5" class="tool-card">
+                    <div class="tool-icon">🌐</div>
+                    <h3>Chrome Bookmarks Organizer</h3>
+                    <p>Google Chromeのお気に入りを整理・管理しやすくするための軽量なブラウザ拡張機能です。</p>
+                </a>
+
+            </div>
+        </section>
+
+        <section id="changelog">
+            <h2>更新履歴</h2>
+            <ul class="changelog-list">
+                <li class="changelog-item">
+                    <div class="changelog-date">2026-06-20</div>
+                    <div class="changelog-text">ポートフォリオサイト（当サイト）を公開しました。各種ツールのバグ報告窓口を設置。</div>
+                </li>
+                </ul>
+        </section>
+
+        <section id="feedback" class="feedback-section">
+            <h2>ご意見・バグ報告</h2>
+            <div class="feedback-box">
+                <p>
+                    ツールの不具合（動かない、エラーが出るなど）や、機能のご要望、感想などがございましたら、以下のいずれかの窓口よりお気軽にお寄せください。
+                </p>
+                
+                <div class="btn-group">
+                    <a href="https://forms.gle/tJT4k46fiBFMz5EE6" target="_blank" class="form-btn">
+                        📋 Googleフォームで報告する
+                    </a>
+                    
+                    <a href="https://github.com/Serika9683/free-tools/issues" target="_blank" class="form-btn secondary">
+                        🐙 GitHub Issuesで報告する
+                    </a>
+                </div>
+
+                <p class="mail-contact">
+                    またはメールにて： <a href="mailto:rasterlain-takana@yahoo.co.jp">rasterlain-takana@yahoo.co.jp</a>
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 serika9683. Powered by GitHub Pages.</p>
+        </footer>
+
+    </main>
 
 </body>
 </html>
