@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serika's Utility Kit</title>
     <style>
-
+        /* 全体のリセットと共通設定 */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -23,6 +23,9 @@
             min-height: 100vh;
         }
 
+        /* ----------------------------------
+           左側サイドバー（メニュー）
+        ---------------------------------- */
         aside {
             width: 260px;
             background-color: #1a222d;
@@ -62,8 +65,11 @@
             background-color: #242f3d;
         }
 
+        /* ----------------------------------
+           右側メインコンテンツエリア
+        ---------------------------------- */
         main {
-            margin-left: 260px;
+            margin-left: 260px; /* サイドバーの幅分空ける */
             padding: 60px 40px;
             flex-grow: 1;
             max-width: 1200px;
@@ -72,8 +78,9 @@
             gap: 80px;
         }
 
+        /* 各セクションの共通設定 */
         section {
-            scroll-margin-top: 60px;
+            scroll-margin-top: 60px; /* スムーススクロール時の余白 */
         }
         section h2 {
             font-size: 1.8rem;
@@ -84,6 +91,7 @@
             border-bottom: 1px solid #1e2631;
         }
 
+        /* HOME（ヘッダー） */
         .home-hero {
             text-align: left;
         }
@@ -99,6 +107,7 @@
             max-width: 700px;
         }
 
+        /* ソフトウェア（グリッドレイアウト） */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -137,6 +146,7 @@
             flex-grow: 1;
         }
 
+        /* 更新履歴 */
         .changelog-list {
             list-style: none;
             display: flex;
@@ -159,6 +169,7 @@
             font-size: 0.95rem;
         }
 
+        /* ご意見・バグ報告 */
         .feedback-box {
             background-color: rgba(30, 38, 49, 0.5);
             padding: 40px;
@@ -212,6 +223,7 @@
             text-decoration: underline;
         }
 
+        /* フッター */
         footer {
             font-size: 0.85rem;
             color: #64748b;
@@ -220,6 +232,9 @@
             margin-top: 40px;
         }
 
+        /* ----------------------------------
+           スマホ・タブレット用レスポンシブ
+        ---------------------------------- */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
